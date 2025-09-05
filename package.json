@@ -1,0 +1,7 @@
+{
+  "name": "klinikrumahpkp",
+  "private": true,
+  "workspaces": [
+    "api"
+  ]
+}
