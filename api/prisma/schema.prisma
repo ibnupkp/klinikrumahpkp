@@ -1,0 +1,78 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id    Int    @id @default(autoincrement())
+  name  String
+  role  String
+}
+
+model Project {
+  id        Int       @id @default(autoincrement())
+  ownerName String
+  address   String
+  luasM2    Int
+  type      String
+  createdAt DateTime  @default(now())
+  consultRequests ConsultRequest[]
+  documents Document[]
+}
+
+model DesignCatalog {
+  id        Int    @id @default(autoincrement())
+  tipe      Int
+  altNo     Int
+  title     String
+  kepmenRef String
+  filesJson String
+}
+
+model ConsultRequest {
+  id        Int       @id @default(autoincrement())
+  project   Project   @relation(fields: [projectId], references: [id])
+  projectId Int
+  mode      String
+  status    String   @default("baru")
+  assignedTo Int?
+  slaDueAt  DateTime?
+  createdAt DateTime @default(now())
+  messages  ConsultMessage[]
+  payments  Payment[]
+}
+
+model ConsultMessage {
+  id        Int      @id @default(autoincrement())
+  request   ConsultRequest @relation(fields: [requestId], references: [id])
+  requestId Int
+  sender    String
+  text      String
+  attachmentsJson String
+  createdAt DateTime @default(now())
+}
+
+model Document {
+  id        Int      @id @default(autoincrement())
+  project   Project  @relation(fields: [projectId], references: [id])
+  projectId Int
+  kind      String
+  url       String
+  version   String
+  checksum  String
+  createdAt DateTime @default(now())
+}
+
+model Payment {
+  id        Int      @id @default(autoincrement())
+  request   ConsultRequest @relation(fields: [requestId], references: [id])
+  requestId Int
+  termin    String
+  amount    Int
+  status    String   @default("unpaid")
+  createdAt DateTime @default(now())
+}
