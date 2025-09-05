@@ -1,6 +1,4 @@
 node_modules
-packages/*/node_modules
-packages/*/dist
-packages/*/.next
-coverage
-prisma/dev.db
+api/node_modules
+api/prisma/dev.db
+.env

@@ -1,13 +1,10 @@
-# Agent Instructions
+# Guidance for Contributors
 
-## Setup
-Run `pnpm run setup` to install dependencies for all packages.
+This repository uses **pnpm** workspaces.
 
-## Tests
-Run `pnpm run test` to execute tests for both `web` and `api` packages.
+### Prisma
+- Generate client: `pnpm --filter api prisma generate`
+- Apply migrations (SQLite dev): `pnpm --filter api prisma migrate dev`
+- Seed database: `pnpm --filter api prisma db seed`
 
-## Build checks
-Run `pnpm run build` to build both packages.
-
-## Pull Requests
-After all checks pass, commit your changes and open a pull request using the `make_pr` tool.
+Always run tests with `pnpm --filter api test` before committing.
