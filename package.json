@@ -1,0 +1,10 @@
+{
+  "name": "konsultasi-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "setup": "pnpm install -r",
+    "test": "pnpm --filter web test && pnpm --filter api test",
+    "build": "pnpm --filter web build && pnpm --filter api build"
+  }
+}
